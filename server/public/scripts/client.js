@@ -8,7 +8,23 @@ function onReady() {
     getJokes();
 }
 
+function addJoke(event){
+    event.preventDefault();
+    let newJoke = {
+        whoseJoke: $('#whoseJokeIn').val(),
+        jokeQuestion: $('#questionIn').val(),
+        punchLine: $('#punchlineIn').val()
+    }
 
+    $.ajax({
+        method: 'POST',
+        url: '/jokes',
+        data: newJoke
+    }).then(function(response){
+        console.log(response);
+        getJokes();
+    })
+}
 
 function getJokes(){
     $.ajax({
